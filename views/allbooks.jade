@@ -1,0 +1,70 @@
+extends layout
+
+block content
+	div.container
+		div.row
+			div.col-md-3
+				a.btn.btn-success(role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample") Your trade requests(#{tradeWaiting.length} outstanding)
+			div.col-md-3
+				a.btn.btn-primary(role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2") Trade requests for you (#{waiting != "" ? waiting.length : 0} unapproved)
+		if successRequest != ""
+			div.alert.alert-success
+				button.close(type='button', data-dismiss="alert", aria-label="Close") <span aria-hidden="true">&times;</span>
+				p #{successRequest}
+		div.collapse(id='collapseExample')
+			h2 Your outstanding requests:
+			form(action='deleteRequest', method='post')
+				input(type='hidden', value='allbooks', name='url')
+				div.row
+					each request in tradeWaiting
+						div.col-md-6
+							p.col-md-10 #{request.bookName}
+							button.btn.col-md-2.request-remove(type='submit', value='#{request.bookId}', name='bookId') X
+			if tradeApproved != ""	
+				h2 Requests approved:
+				div.row
+					each request in tradeApproved
+						div.col-md-6
+							p.col-md-10 #{request.bookName}
+			if tradeUnapproved != ""	
+				h2 Requests unapproved:
+				div.row
+					each request in tradeUnapproved
+						div.col-md-6
+							p.col-md-10 #{request.bookName}							
+							
+
+		div.collapse(id='collapseExample2')
+			h2 Requests from other users:
+			div.row
+				if waiting != ""
+					each request in waiting
+						div.col-md-6
+							p.col-md-10 #{request.bookName}
+							a.btn.col-md-1.request-remove(href='/unapprove/#{request._id}&allbooks') X
+							a.btn.col-md-1.request-accept(href='/approve/#{request._id}&allbooks') <i class='fa fa-check'></i>
+			h2 Requests you've approved:
+			div.row
+				if approved != ""
+					each request in approved
+						div.col-md-6
+							p.col-md-10 #{request.bookName}
+			h2 Requests you've unapproved:
+			div.row
+				if unapproved != ""
+					each request in unapproved
+						div.col-md-6
+							p.col-md-10 #{request.bookName}		
+		h1 All Books:
+		hr
+		p Click the <i class='fa fa-upload'></i> to request a trade!
+		if error
+			p #{error}
+		if success != ""
+			p.alert.alert-success #{success}
+		form(action='allBooks', method='post')
+			if books
+				each book in books
+					img.book(alt='#{book.bookName}', src='#{book.cover}')
+					if book.userEmail != user.email && book.requested == false
+						button.request(type='submit', value='#{book._id}', name='id') <i class='fa fa-upload'></i>

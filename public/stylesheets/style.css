@@ -1,8 +1,70 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.navbar-default {
+	background-color: #F8F8F8;
+	border-color: #F8F8F8;
+}
+
+.background h1 {
+	font-size: 60px;
+}
+
+.background {
+	background-color: #4393B9;
+	padding: 30px;
+	color: white;
+	margin-bottom: 50px;
+	margin-top: -20px;
+}
+
+.leaf {
+	font-size: 60pt;
+}
+
+.book {
+	border: 1px solid gray;
+	padding: 3px;
+	margin-top: 6px;
+}
+
+.remove {
+	margin-left: -30px;
+	vertical-align: top;
+	margin-top: 20px;
+	background: transparent none repeat scroll 0px 0px;
+	border: none;
+	color: rgb(243, 20, 20);
+	font-size: 17px;
+	opacity: 0.5;
+	position: absolute;
+}
+
+.request {
+	margin-left: -30px;
+	vertical-align: top;
+	margin-top: 30px;
+	background: transparent none repeat scroll 0px 0px;
+	border: none;
+	color: rgb(243, 20, 20);
+	font-size: 17px;
+	opacity: 0.5;
+	position: absolute;
+}
+
+.request-remove {
+	color: rgb(243, 20, 20);
+	opacity: 0.5;
+	font-weight: 900;
+}
+
+.request-accept {
+	color: green;
+	opacity: 0.5;
+	font-weight: 900;
 }
